@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with regular expressions</title>
+    <style>
+        .form__fieldset {
+            max-width: 500px;
+            min-height: 400px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        legend {
+            text-align: center;
+        }
+
+        .form__label {
+            margin: 0 0 5px 0;
+        }
+
+        .input {
+            margin: 0 auto 10px;
+            border: 1px solid grey;
+            border-radius: 10px;
+            padding: 3px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .input_true {
+            border: 1px solid forestgreen;
+        }
+
+        .input_false {
+            border: 1px solid red;
+        }
+    </style>
+    <script async>
+        'use strict'
+        let button = document.getElementsByClassName('form__submit-btn')[0];
+        const usernameExp = /^[a-zа-яё]{2,}$/i;
+        const phoneExp = /\+\d{1,4}\(?\d{3}\)?\d{3}-?\d{4}\b/;
+        const emailExp = /(^\w+(|(\.|\-)\w+))(?=@[a-z]{2,}\.[a-z]{2,4}\b)/i;
+
+        function classListToggle(element, regexp) {
+            if (regexp.test(element.value)) {
+                element.classList.remove('input_false');
+                element.classList.add('input_true');
+            } else {
+                element.classList.add('input_false');
+                element.classList.remove('input_true');
+            }
+        }
+
+        function validate() {
+            let username = document.getElementById('name');
+            let phone = document.getElementById('phone');
+            let email = document.getElementById('email');
+            classListToggle(username, usernameExp);
+            classListToggle(phone, phoneExp);
+            classListToggle(email, emailExp);
+        }
+
+        if (window.onload) {
+            button.addEventListener('click', validate);
+        }
+    </script>
+</head>
+
+<body>
+    <form action="#" class="form">
+        <fieldset class="form__fieldset">
+            <legend class="form__legend">Форма обратной связи</legend>
+            <label for="name" class="form__label">Ваше имя:</label>
+            <input type="text" id="name" class="form__username input">
+            <label for="phone" class="form__label">Ваш телефон:</label>
+            <input type="text" id="phone" class="form__phone input">
+            <label for="email" class="form__label">Ваша почта:</label>
+            <input type="email" id="email" class="form__email input">
+            <label for="text" class="form__label">Ваше сообщение:</label>
+            <textarea name="text" id="text" cols="50" rows="10" class="form__text input"></textarea>
+            <input type="submit" class="form__submit-btn">
+        </fieldset>
+    </form>
+</body>
+
+</html>
