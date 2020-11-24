@@ -67,14 +67,11 @@
             classListToggle(email, emailExp);
         }
 
-        if (window.onload) {
-            button.addEventListener('click', validate);
-        }
     </script>
 </head>
 
 <body>
-    <form action="#" class="form">
+    <form action="#" class="form" onsubmit="validate()">
         <fieldset class="form__fieldset">
             <legend class="form__legend">Форма обратной связи</legend>
             <label for="name" class="form__label">Ваше имя:</label>
